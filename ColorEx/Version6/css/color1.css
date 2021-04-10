@@ -1,0 +1,128 @@
+/* general */
+.header-top {
+    background: cadetblue;
+}
+
+.heder-bottom {
+    background: darkcyan;
+}
+
+.footer-w3l {
+    background: darkcyan;
+}
+
+/* home page */
+div.core-slider_arrow__left { /* not work */
+	left: 20px;
+	background: url(../images/arrow_left.png) no-repeat 11px 12px darkcyan;
+}
+
+div.core-slider_arrow__right { /* not work */
+	right: 20px;
+	background: url(../images/arrow_right.png) no-repeat 14px 12px darkcyan;
+}
+
+.ban-text {
+    background: darkcyan;
+}
+
+.ban-text1 {
+    background: darkcyan;
+}
+
+.ban-text2 {
+    background: darkcyan;
+}
+
+h2.tittle {
+	text-align: center;
+	font-size: 3em;
+	color: darkcyan;
+}
+
+.women h6 a {
+	color:darkcyan;
+	text-decoration: none;
+}
+
+h3.tittle1 {
+	text-align: center;
+	font-size: 3em;
+	color: darkcyan;
+}
+
+.latest-text2 {
+	position: absolute;
+	top: 3%;
+	left: 80%;
+	background: darkcyan;
+	padding: 1.5em 0em;
+	border-radius: 60px;
+	text-align: center;
+	width: 17%;
+}
+
+.latest-text {
+	background: darkcyan;
+	padding: 1em;
+	position: absolute;
+	left: 0;
+	bottom: -67%;
+	text-align: center;
+	width: 100%;
+	height: 210px;
+	-webkit-transition: .5s all;
+	transition: .5s all;
+	-moz-transition: .5s all;
+}
+
+.my-cart-b {
+	background: none;
+	text-decoration: none;
+	color: darkcyan;
+	font-size: 1em;
+	border: 2px solid #F19E1F;
+	padding: 0.5em 1em;
+	outline: none;
+}
+
+.my-cart-b:hover, .my-cart-b:focus, .my-cart-b:active {
+	color: white;
+	background: none;
+	border: 2px solid darkcyan;
+	outline: none !important;
+}
+
+/* login page */
+.form-w3agile h3 {
+	color: darkcyan;
+	font-size: 2.5em;
+	text-align: center;
+	margin-bottom: 1.5em;
+}
+
+/* mail */
+.mail-grid h5 {
+	font-size: 1.8em;
+	color: darkcyan;
+	margin-top: .5em;
+}
+
+.mail-bottom h4 {
+	font-size: 2em;
+	text-align: center;
+	margin-bottom: 1em;
+	color: darkcyan;
+}
+
+/* single */
+.single-grid1 h3 {
+	font-size: 2.5em;
+	text-align: center;
+	color: darkcyan;
+	margin-bottom: 0.3em;
+}
+
+/* products */
+
+/* products1 */
