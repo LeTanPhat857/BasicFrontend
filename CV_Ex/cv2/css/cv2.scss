@@ -1,13 +1,14 @@
 * {
     margin: auto;
-    padding: 0;
+    padding: 0px;
     box-sizing: border-box;
     list-style: none;
     font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
 }
 
 body {
-   background: lightgray;
+    margin: 50px;
+    background: lightgray;
 }
 
 .white-txt {
@@ -53,22 +54,21 @@ body {
 
 // start resume
 .resume {
-    width: 900px;
+    width: 1000px;
 }
 
 // start header
 .header {
     display: flex;
-    height: 180px;
-    padding-top: 20px;
+    height: 220px;
+    padding: 45px 30px 30px 30px;
     justify-content: space-around;
-    background-image: url('/CV/cv2/images/Foggy-Forest.jpg');
+    background-image: url('/CV_Ex/cv2/images/Foggy-Forest.jpg');
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
 
 .header > div {
-    // background-color: gray;
     width: 160px;
     height: 160px;
 }
@@ -81,15 +81,17 @@ body {
 
 .header .info {
     text-align: center;
+    position: relative;
+    top: -10px;
 } 
 
 .header .info .img {
-    margin: 10px 0px;
+    margin-bottom: 5px;
 }
 
 .header .info .img img {
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
 }
 
@@ -101,25 +103,47 @@ body {
     text-align: center;
 }
 
-.header .follow .icon {
+.header .follow .icons {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
 }
 
-.header .follow .icon > span {
-    margin: 5px 5px;
+.header .follow .icons .icon {
+    width: 30px;
+    height: 30px;
+    margin: 0px 10px 10px 10px;
+    border: 1px solid white;
+    display: flex;
+    justify-items: center;
+}
+
+.header .follow .icons .icon > i {
+    font-size: 20px;
 }
 
 .header .visit {
     text-align: center;
+}
+
+.header .visit .icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.header .visit .icon > i {
+    font-size: 28px;
 }
 // end header
 
 // start content
 .content {
     width: 100%;
-    height: 700px;
+    height: 600px;
+    padding: 10px 40px 5px 40px;
     background-color: white;
 }
 
@@ -128,40 +152,34 @@ body {
     float: left;
 }
 
-.left .hello {
+.left .hello, .mySpecialties {
     border: 1px solid lightgray;
-    margin: 10px 20px 5px 10px;
+    margin: 0px 5px 10px 0px;
     padding: 10px 30px 30px 30px;
 }
 
 .left .hello .big-title {
     position: relative;
     top: 0;
-    left: -40px;
-    font-size: 48px;
+    left: -42px;
+    font-size: 60px;
     font-weight: 900;
     color: white;
     text-shadow: -1px 0px brown, 0px 1px brown, 1px 0px brown, 0px -1px brown;
 }
 
-.left .mySpecialties {
-    border: 1px solid lightgray;
-    margin: 10px 20px 5px 10px;
-    padding: 10px 30px 30px 30px;
-}
-
 .left .mySpecialties .title {
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .horizontal-break {
     border-top: 1px solid lightgray;
-    width: 65%;
+    width: 50%;
     margin-bottom: 40px;
     position: relative;
     top: 15px;
-    left: -93px;
+    left: -129px;
 }
 
 .left .mySpecialties .specialties {
@@ -183,31 +201,43 @@ body {
     border-radius: 50%;
 }
 
-.left .mySpecialties .specialties .specialty .break {
+.left .mySpecialties .specialties .specialty .icon:before {
+    width: 1px;
+    height: 10px;
+    background-color: brown;
+    position: absolute;
+}
+
+.left .mySpecialties .specialties .specialty .icon > i {
     color: brown;
-    font-size: 30px;
-    font-weight: 400;
+}
+
+.left .mySpecialties .specialties .specialty .break {
+    width: 2px;
+    height: 35px;
+    background-color: brown;
     position: relative;
     top: 0;
-    left: 0;
+    left: 50px;
     margin: 10px 0px;
 }
 
 .right {
     width: 50%;
+    height: auto;
     float: right;
 }
 
 .right .education {
     border: 1px solid lightgray;
     border-bottom: 0px;
-    margin: 10px 20px 5px 10px;
-    padding: 10px 30px 30px 30px;
+    margin: 0px 0px 0px 5px;
+    padding: 10px 30px 10px 30px;
 }
 
 .right .education .title {
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .right .education ul li {
@@ -238,6 +268,50 @@ body {
     left: 15px;
 }
 
+.right .experiance {
+    border: 1px solid lightgray;
+    border-top: 0px;
+    margin: 0px 0px 10px 5px;
+    padding: 10px 30px 30px 30px;
+}
+
+.right .experiance .title {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.right .experiance ul li {
+    margin-bottom: 10px;
+}
+
+.right .experiance ul li .point {
+    width: 5px;
+    height: 5px;
+    background-color: brown;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.right .experiance ul li .point .break {
+    width: 2px;
+    height: 45px;
+    background-color: brown;
+    position: absolute;
+    top: 10px;
+    left: 2px;
+}
+
+.right .experiance ul li .edu-content {
+    text-align: left;
+    position: relative;
+    top: -7px;
+    left: 15px;
+}
 // end content
 
+// start skills
+.skills {
+
+}
+// end skills
 // end resume
