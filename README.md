@@ -1,4 +1,3 @@
 # Frontend
-Exercise and project
-Html, css, javascript
-jquery
+Exercises and small projects
+
