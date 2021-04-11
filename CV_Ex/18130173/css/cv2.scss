@@ -63,7 +63,7 @@ body {
     height: 220px;
     padding: 45px 30px 30px 30px;
     justify-content: space-around;
-    background-image: url('/CV_Ex/cv2/images/Foggy-Forest.jpg');
+    background-image: url('../img/Foggy-Forest.jpg');
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
@@ -142,7 +142,7 @@ body {
 // start content
 .content {
     width: 100%;
-    height: 600px;
+    height: 1200px;
     padding: 10px 40px 5px 40px;
     background-color: white;
 }
@@ -155,7 +155,7 @@ body {
 .left .hello, .mySpecialties {
     border: 1px solid lightgray;
     margin: 0px 5px 10px 0px;
-    padding: 10px 30px 30px 30px;
+    padding: 20px 30px 30px 30px;
 }
 
 .left .hello .big-title {
@@ -171,6 +171,7 @@ body {
 .left .mySpecialties .title {
     font-size: 20px;
     font-weight: 500;
+    letter-spacing: 1px;
 }
 
 .horizontal-break {
@@ -229,15 +230,17 @@ body {
 }
 
 .right .education {
+    height: 280.8px;
     border: 1px solid lightgray;
     border-bottom: 0px;
     margin: 0px 0px 0px 5px;
-    padding: 10px 30px 10px 30px;
+    padding: 20px 30px 30px 30px;
 }
 
 .right .education .title {
     font-size: 20px;
     font-weight: 500;
+    letter-spacing: 1px;
 }
 
 .right .education ul li {
@@ -245,8 +248,8 @@ body {
 }
 
 .right .education ul li .point {
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
     background-color: brown;
     border-radius: 50%;
     position: absolute;
@@ -255,7 +258,7 @@ body {
 .right .education ul li .point .break {
     width: 2px;
     height: 45px;
-    background-color: brown;
+    background-color: lightgray;
     position: absolute;
     top: 10px;
     left: 2px;
@@ -269,15 +272,17 @@ body {
 }
 
 .right .experiance {
+    height: 328px;
     border: 1px solid lightgray;
     border-top: 0px;
     margin: 0px 0px 10px 5px;
-    padding: 10px 30px 30px 30px;
+    padding: 40px 30px 30px 30px;
 }
 
 .right .experiance .title {
     font-size: 20px;
     font-weight: 500;
+    letter-spacing: 1px;
 }
 
 .right .experiance ul li {
@@ -295,7 +300,7 @@ body {
 .right .experiance ul li .point .break {
     width: 2px;
     height: 45px;
-    background-color: brown;
+    background-color: lightgray;
     position: absolute;
     top: 10px;
     left: 2px;
@@ -314,4 +319,106 @@ body {
 
 }
 // end skills
+
+// start hobbies and interest
+.hobbies-and-interest {
+    clear:both;
+    padding: 20px 30px 30px 30px;
+    border: 1px solid lightgray;
+}
+
+.hobbies-and-interest .title {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.hobbies-and-interest ul {
+    margin: 25px -20px 0px -20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.hobbies-and-interest ul li {
+    width: 90px;
+    height: 90px;
+    border: 1px solid brown;
+    border-radius: 50%;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+}
+.hobbies-and-interest ul li i {
+    color: gray;
+}
+
+.hobbies-and-interest ul li span {
+    font-size: 10px;
+}
+
+.circle-one {
+    width: 120px;
+    height: 120px;
+    border: 1px solid brown;
+    border-radius: 50%;
+}
+
+.circle-two {
+    width: 108px;
+    height: 108px;
+    border: 1px solid brown;
+    border-radius: 50%;
+    position: relative;
+    top: 6px;
+    left: 0px;
+}
+
+.circle-three {
+    width: 96px;
+    height: 96px;
+    border: 1px solid brown;
+    border-radius: 50%;
+    position: relative;
+    top: 6px;
+    left: 0px;
+}
+
+.rec-one {
+    width: 80px;
+    height: 65px;
+    background-color: white;
+    position: relative;
+    top: -115px;
+    left: 30px;
+}
+
+.rec-two {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    position: relative;
+    top: -135px;
+    left: 30px;
+    border-radius: 10px;
+}
+
+.rec-three {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    position: relative;
+    top: -150px;
+    left: 25px;
+    border-radius: 15px;
+}
+
+.r-w-p {
+    font-size: 10px;
+    position: relative;
+    top: -215px;
+    left: 40px;
+    border-radius: 15px;
+    line-height: 1.5;
+}
+// end hobbies and interest
 // end resume
