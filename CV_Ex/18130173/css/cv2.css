@@ -56,7 +56,7 @@ body {
   width: 1000px;
 }
 
-.header {
+.resume .header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -69,42 +69,42 @@ body {
   background-repeat: no-repeat;
 }
 
-.header > div {
+.resume .header > div {
   width: 160px;
   height: 160px;
 }
 
-.header .title {
+.resume .header .title {
   color: white;
   font-size: 13;
   margin-bottom: 20px;
 }
 
-.header .info {
+.resume .header .info {
   text-align: center;
   position: relative;
   top: -10px;
 }
 
-.header .info .img {
+.resume .header .info .img {
   margin-bottom: 5px;
 }
 
-.header .info .img img {
+.resume .header .info .img img {
   width: 120px;
   height: 120px;
   border-radius: 50%;
 }
 
-.header .contact {
+.resume .header .contact {
   text-align: left;
 }
 
-.header .follow {
+.resume .header .follow {
   text-align: center;
 }
 
-.header .follow .icons {
+.resume .header .follow .icons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -116,7 +116,7 @@ body {
       justify-content: space-around;
 }
 
-.header .follow .icons .icon {
+.resume .header .follow .icons .icon {
   width: 30px;
   height: 30px;
   margin: 0px 10px 10px 10px;
@@ -127,15 +127,15 @@ body {
   justify-items: center;
 }
 
-.header .follow .icons .icon > i {
+.resume .header .follow .icons .icon > i {
   font-size: 20px;
 }
 
-.header .visit {
+.resume .header .visit {
   text-align: center;
 }
 
-.header .visit .icon {
+.resume .header .visit .icon {
   width: 60px;
   height: 60px;
   display: -webkit-box;
@@ -145,7 +145,7 @@ body {
   background-color: white;
 }
 
-.header .visit .icon > i {
+.resume .header .visit .icon > i {
   font-size: 28px;
 }
 
@@ -242,7 +242,6 @@ body {
 
 .right {
   width: 50%;
-  height: auto;
   float: right;
 }
 
@@ -328,6 +327,63 @@ body {
   position: relative;
   top: -7px;
   left: 15px;
+}
+
+.skills {
+  height: 350px;
+  margin-bottom: 10px;
+  border: 1px solid lightgray;
+}
+
+.skills .creative-skills {
+  padding: 20px 30px 30px 30px;
+}
+
+.skills .software-skills {
+  padding: 20px 30px 30px 40px;
+}
+
+.skills .software-skills ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.skills .software-skills ul li .icon {
+  width: 35px;
+  height: 35px;
+  border: 2px solid #494949;
+  border-radius: 2px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 0px;
+}
+
+.skills .software-skills ul li .icon span {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+}
+
+.skills .software-skills ul li .icon-name {
+  width: 80px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.skills .software-skills ul li .skill-scrore {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.skills .software-skills ul li .skill-scrore .point {
+  width: 10px;
+  height: 10px;
+  margin: 6px;
+  background-color: lightsalmon;
+  border-radius: 50%;
 }
 
 .hobbies-and-interest {
