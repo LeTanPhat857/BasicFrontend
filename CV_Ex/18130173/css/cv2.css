@@ -4,7 +4,7 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   list-style: none;
-  font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+  font-family: Tahoma, Verdana, sans-serif;
 }
 
 body {
@@ -14,6 +14,8 @@ body {
 
 .resume {
   width: 1000px;
+  -webkit-box-shadow: 5px 10px 8px #888888;
+          box-shadow: 5px 10px 8px #888888;
 }
 
 .resume .header {
@@ -36,7 +38,7 @@ body {
 
 .resume .header .title {
   color: white;
-  font-size: 13;
+  font-size: 18px;
   margin-bottom: 20px;
 }
 
@@ -46,13 +48,13 @@ body {
   top: -10px;
 }
 
-.resume .header .info .img {
-  margin-bottom: 5px;
-}
-
-.resume .header .info .img img {
+.resume .header .info .avatar {
   width: 120px;
   height: 120px;
+  margin-bottom: 10px;
+  background-image: url("../img/avatar.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   border-radius: 50%;
 }
 
@@ -110,46 +112,47 @@ body {
 }
 
 .resume .content {
-  width: 100%;
-  height: 1200px;
+  height: 1220px;
   padding: 10px 40px 5px 40px;
   background-color: white;
 }
 
-.resume .content .left {
+.resume .content .title {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.resume .content .main-content .left {
   width: 50%;
   float: left;
 }
 
-.resume .content .left .hello {
+.resume .content .main-content .left .hello {
+  height: 300px;
   border: 1px solid lightgray;
   margin: 0px 5px 10px 0px;
   padding: 20px 30px 30px 30px;
 }
 
-.resume .content .left .hello .big-title {
+.resume .content .main-content .left .hello .big-title {
   position: relative;
   top: 0;
   left: -42px;
   font-size: 60px;
   font-weight: 900;
   color: white;
-  text-shadow: -1px 0px brown, 0px 1px brown, 1px 0px brown, 0px -1px brown;
+  text-shadow: -1px 0px #d4744e, 0px 1px #d4744e, 1px 0px #d4744e, 0px -1px #d4744e;
 }
 
-.resume .content .left .mySpecialties {
+.resume .content .main-content .left .mySpecialties {
+  height: 310px;
   border: 1px solid lightgray;
   margin: 0px 5px 10px 0px;
   padding: 20px 30px 30px 30px;
 }
 
-.resume .content .left .mySpecialties .title {
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: 1px;
-}
-
-.resume .content .left .mySpecialties .specialties {
+.resume .content .main-content .left .mySpecialties .specialties {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -161,29 +164,29 @@ body {
       justify-content: space-around;
 }
 
-.resume .content .left .mySpecialties .specialties .specialty {
+.resume .content .main-content .left .mySpecialties .specialties .specialty {
   text-align: center;
 }
 
-.resume .content .left .mySpecialties .specialties .specialty .icon {
+.resume .content .main-content .left .mySpecialties .specialties .specialty .icon {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   justify-items: center;
   width: 100px;
   height: 100px;
-  border: 2px solid brown;
+  border: 1px solid #d4744e;
   border-radius: 50%;
 }
 
-.resume .content .left .mySpecialties .specialties .specialty .icon > i {
-  color: brown;
+.resume .content .main-content .left .mySpecialties .specialties .specialty .icon > i {
+  color: #d4744e;
 }
 
-.resume .content .left .mySpecialties .specialties .specialty .break {
+.resume .content .main-content .left .mySpecialties .specialties .specialty .break {
   width: 2px;
   height: 35px;
-  background-color: brown;
+  background-color: #d4744e;
   position: relative;
   top: 0;
   left: 50px;
@@ -196,17 +199,11 @@ body {
 }
 
 .resume .content .right .education {
-  height: 280.8px;
+  height: 300px;
   border: 1px solid lightgray;
   border-bottom: 0px;
   margin: 0px 0px 0px 5px;
   padding: 20px 30px 30px 30px;
-}
-
-.resume .content .right .education .title {
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: 1px;
 }
 
 .resume .content .right .education ul li {
@@ -216,7 +213,7 @@ body {
 .resume .content .right .education ul li .point {
   width: 6px;
   height: 6px;
-  background-color: brown;
+  background-color: #d4744e;
   border-radius: 50%;
   position: absolute;
 }
@@ -238,17 +235,11 @@ body {
 }
 
 .resume .content .right .experiance {
-  height: 328px;
+  height: 320px;
+  margin: 0px 0px 10px 5px;
+  padding: 30px 30px 30px 30px;
   border: 1px solid lightgray;
   border-top: 0px;
-  margin: 0px 0px 10px 5px;
-  padding: 40px 30px 30px 30px;
-}
-
-.resume .content .right .experiance .title {
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: 1px;
 }
 
 .resume .content .right .experiance ul li {
@@ -274,7 +265,7 @@ body {
 .resume .point {
   width: 6px;
   height: 6px;
-  background-color: brown;
+  background-color: #d4744e;
   border-radius: 50%;
   position: absolute;
 }
@@ -289,32 +280,41 @@ body {
 }
 
 .resume .skills {
+  width: 100%;
   height: 350px;
+  clear: both;
   margin-bottom: 10px;
   border: 1px solid lightgray;
 }
 
-.resume .skills .creative-skills {
+.resume .skills .left {
+  width: 50%;
+  height: 445px;
+  float: left;
+}
+
+.resume .skills .left .creative-skills {
   padding: 20px 30px 30px 30px;
 }
 
-.resume .skills .creative-skills .skill-list {
+.resume .skills .left .creative-skills .skill-list {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.resume .skills .creative-skills .skill-list .i-can-do {
+.resume .skills .left .creative-skills .skill-list .i-can-do {
   margin-left: 0px;
   margin-top: 0px;
+  width: 170px;
 }
 
-.resume .skills .creative-skills .skill-list .i-can-do .title {
-  color: brown;
+.resume .skills .left .creative-skills .skill-list .i-can-do .title {
+  color: #d4744e;
   font-size: 8px;
   letter-spacing: 3px;
   position: relative;
-  top: 200px;
+  top: 199px;
   left: 0px;
   -webkit-transform-origin: 0 0;
           transform-origin: 0 0;
@@ -322,7 +322,7 @@ body {
           transform: rotate(270deg);
 }
 
-.resume .skills .creative-skills .skill-list .i-can-do .top-box {
+.resume .skills .left .creative-skills .skill-list .i-can-do .top-box {
   width: 20px;
   height: 15px;
   border: 1px solid lightgray;
@@ -333,7 +333,7 @@ body {
   left: -70px;
 }
 
-.resume .skills .creative-skills .skill-list .i-can-do .bottom-box {
+.resume .skills .left .creative-skills .skill-list .i-can-do .bottom-box {
   width: 20px;
   height: 15px;
   border: 1px solid lightgray;
@@ -344,27 +344,30 @@ body {
   left: -70px;
 }
 
-.resume .skills .creative-skills .skill-list .i-can-do ul {
+.resume .skills .left .creative-skills .skill-list .i-can-do ul {
+  width: 130px;
+  height: 235px;
   margin-left: 35px;
   position: relative;
   top: -40px;
   left: 0px;
 }
 
-.resume .skills .creative-skills .skill-list .i-can-do ul li {
+.resume .skills .left .creative-skills .skill-list .i-can-do ul li {
   margin-bottom: 24px;
 }
 
-.resume .skills .creative-skills .skill-list .programing-skills {
+.resume .skills .left .creative-skills .skill-list .programing-skills {
   margin-left: -30px;
+  width: 128px;
 }
 
-.resume .skills .creative-skills .skill-list .programing-skills .title {
-  color: brown;
+.resume .skills .left .creative-skills .skill-list .programing-skills .title {
+  color: #d4744e;
   font-size: 8px;
   letter-spacing: 3px;
   position: relative;
-  top: 180px;
+  top: 179px;
   left: 0px;
   -webkit-transform-origin: 0 0;
           transform-origin: 0 0;
@@ -372,7 +375,7 @@ body {
           transform: rotate(270deg);
 }
 
-.resume .skills .creative-skills .skill-list .programing-skills .top-box {
+.resume .skills .left .creative-skills .skill-list .programing-skills .top-box {
   width: 20px;
   height: 30px;
   border: 1px solid lightgray;
@@ -383,7 +386,7 @@ body {
   left: -50px;
 }
 
-.resume .skills .creative-skills .skill-list .programing-skills .bottom-box {
+.resume .skills .left .creative-skills .skill-list .programing-skills .bottom-box {
   width: 20px;
   height: 30px;
   border: 1px solid lightgray;
@@ -394,29 +397,39 @@ body {
   left: -50px;
 }
 
-.resume .skills .creative-skills .skill-list .programing-skills ul {
+.resume .skills .left .creative-skills .skill-list .programing-skills ul {
   margin-left: 35px;
   position: relative;
   top: -70px;
   left: 0px;
 }
 
-.resume .skills .creative-skills .skill-list .programing-skills ul li {
+.resume .skills .left .creative-skills .skill-list .programing-skills ul li {
   margin-bottom: 24px;
 }
 
-.resume .skills .software-skills {
-  padding: 20px 30px 30px 40px;
+.resume .skills .right {
+  width: 50%;
+  height: 370px;
+  float: right;
 }
 
-.resume .skills .software-skills ul li {
+.resume .skills .right .software-skills {
+  padding: 20px 30px 30px 35px;
+}
+
+.resume .skills .right .software-skills ul {
+  margin-left: -15px;
+}
+
+.resume .skills .right .software-skills ul li {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   margin-bottom: 15px;
 }
 
-.resume .skills .software-skills ul li .icon {
+.resume .skills .right .software-skills ul li .icon {
   width: 35px;
   height: 35px;
   border: 2px solid #494949;
@@ -427,24 +440,24 @@ body {
   margin-left: 0px;
 }
 
-.resume .skills .software-skills ul li .icon span {
+.resume .skills .right .software-skills ul li .icon span {
   font-family: 'Courier New', Courier, monospace;
   font-weight: 700;
 }
 
-.resume .skills .software-skills ul li .icon-name {
+.resume .skills .right .software-skills ul li .icon-name {
   width: 80px;
   font-weight: 500;
   text-align: left;
 }
 
-.resume .skills .software-skills ul li .skill-scrore {
+.resume .skills .right .software-skills ul li .skill-scrore {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.resume .skills .software-skills ul li .skill-scrore .point-score {
+.resume .skills .right .software-skills ul li .skill-scrore .point-score {
   width: 10px;
   height: 10px;
   margin: 6px;
@@ -457,7 +470,8 @@ body {
   padding: 20px 30px 10px 30px;
   border: 1px solid lightgray;
   position: relative;
-  top: -80px;
+  top: -87px;
+  margin-top: 10px;
 }
 
 .resume .hobbies-and-interest .title {
@@ -479,7 +493,7 @@ body {
 .resume .hobbies-and-interest ul li {
   width: 90px;
   height: 90px;
-  border: 1px solid brown;
+  border: 1px solid #d4744e;
   border-radius: 50%;
   text-align: center;
   display: -webkit-box;
@@ -501,14 +515,14 @@ body {
 .resume .hobbies-and-interest .circle-one {
   width: 120px;
   height: 120px;
-  border: 1px solid brown;
+  border: 1px solid #d4744e;
   border-radius: 50%;
 }
 
 .resume .hobbies-and-interest .circle-two {
   width: 108px;
   height: 108px;
-  border: 1px solid brown;
+  border: 1px solid #d4744e;
   border-radius: 50%;
   position: relative;
   top: 6px;
@@ -518,7 +532,7 @@ body {
 .resume .hobbies-and-interest .circle-three {
   width: 96px;
   height: 96px;
-  border: 1px solid brown;
+  border: 1px solid #d4744e;
   border-radius: 50%;
   position: relative;
   top: 6px;

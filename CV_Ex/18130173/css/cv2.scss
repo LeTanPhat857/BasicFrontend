@@ -1,8 +1,10 @@
 // variables
-$font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+$font-family: Tahoma, Verdana, sans-serif;
 $background-color: #d3d3d3;
 $content-color: rgb(255, 255, 255);
-
+$decorating-color: rgb(212, 116, 78);
+$avatar-url: '../img/avatar.jpg';
+$header-image-url: '../img/Foggy-Forest.jpg';
 //
 * {
     margin: auto;
@@ -15,11 +17,13 @@ $content-color: rgb(255, 255, 255);
 body {
     margin: 50px;
     background: $background-color;
+    
 }
 
 // start resume
 .resume {
     width: 1000px;
+    box-shadow: 5px 10px 8px #888888;
 
     // start header
     .header {
@@ -27,7 +31,7 @@ body {
         height: 220px;
         padding: 45px 30px 30px 30px;
         justify-content: space-around;
-        background-image: url('../img/Foggy-Forest.jpg');
+        background-image: url($header-image-url);
         background-size: 100% 100%;
         background-repeat: no-repeat;
 
@@ -38,7 +42,7 @@ body {
         
         .title {
             color: white;
-            font-size: 13;
+            font-size: 18px;
             margin-bottom: 20px;
         }
         
@@ -47,14 +51,14 @@ body {
             position: relative;
             top: -10px;
 
-            .img {
-                margin-bottom: 5px;
-                
-                img {
-                    width: 120px;
-                    height: 120px;
-                    border-radius: 50%;
-                }
+            .avatar {
+                width: 120px;
+                height: 120px;
+                margin-bottom: 10px;
+                background-image: url($avatar-url);
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+                border-radius: 50%;
             }
         } 
 
@@ -105,71 +109,75 @@ body {
 
     // start content
     .content {
-        width: 100%;
-        height: 1200px;
+        height: 1220px;
         padding: 10px 40px 5px 40px;
         background-color: $content-color;
 
-        .left {
-            width: 50%;
-            float: left;
+        .title {
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
 
-            .hello {
-                border: 1px solid lightgray;
-                margin: 0px 5px 10px 0px;
-                padding: 20px 30px 30px 30px;
+        .main-content {
 
-                .big-title {
-                    position: relative;
-                    top: 0;
-                    left: -42px;
-                    font-size: 60px;
-                    font-weight: 900;
-                    color: white;
-                    text-shadow: -1px 0px brown, 0px 1px brown, 1px 0px brown, 0px -1px brown;
+            .left {
+                width: 50%;
+                float: left;
+    
+                .hello {
+                    height: 300px;
+                    border: 1px solid lightgray;
+                    margin: 0px 5px 10px 0px;
+                    padding: 20px 30px 30px 30px;
+    
+                    .big-title {
+                        position: relative;
+                        top: 0;
+                        left: -42px;
+                        font-size: 60px;
+                        font-weight: 900;
+                        color: white;
+                        text-shadow: -1px 0px $decorating-color, 0px 1px $decorating-color, 1px 0px $decorating-color, 0px -1px $decorating-color;
+                    }
                 }
-            }
-
-            .mySpecialties {
-                border: 1px solid lightgray;
-                margin: 0px 5px 10px 0px;
-                padding: 20px 30px 30px 30px;
-
-                .title {
-                    font-size: 20px;
-                    font-weight: 500;
-                    letter-spacing: 1px;
-                }
-
-                .specialties {
-                    display: flex;
-                    flex-flow: row nowrap;
-                    justify-content: space-around;
-
-                    .specialty {
-                        text-align: center;
-
-                        .icon {
-                            display: flex;
-                            justify-items: center;
-                            width: 100px;
-                            height: 100px;
-                            border: 2px solid brown;
-                            border-radius: 50%;
-
-                            > i {
-                                color: brown;
+    
+                .mySpecialties {
+                    height: 310px;
+                    border: 1px solid lightgray;
+                    margin: 0px 5px 10px 0px;
+                    padding: 20px 30px 30px 30px;
+    
+                    .specialties {
+                        display: flex;
+                        flex-flow: row nowrap;
+                        justify-content: space-around;
+    
+                        .specialty {
+                            text-align: center;
+    
+                            .icon {
+                                display: flex;
+                                justify-items: center;
+                                width: 100px;
+                                height: 100px;
+                                border: 1px solid $decorating-color;
+                                border-radius: 50%;
+    
+                                > i {
+                                    color: $decorating-color;
+                                }
                             }
-                        }
-
-                        .break {
-                            width: 2px;
-                            height: 35px;
-                            background-color: brown;
-                            position: relative;
-                            top: 0;
-                            left: 50px;
-                            margin: 10px 0px;
+    
+                            .break {
+                                width: 2px;
+                                height: 35px;
+                                background-color: $decorating-color;
+                                position: relative;
+                                top: 0;
+                                left: 50px;
+                                margin: 10px 0px;
+                            }
                         }
                     }
                 }
@@ -179,19 +187,13 @@ body {
         .right {
             width: 50%;
             float: right;
-    
+
             .education {
-                height: 280.8px;
+                height: 300px;
                 border: 1px solid lightgray;
                 border-bottom: 0px;
                 margin: 0px 0px 0px 5px;
                 padding: 20px 30px 30px 30px;
-    
-                .title {
-                    font-size: 20px;
-                    font-weight: 500;
-                    letter-spacing: 1px;
-                }
     
                 ul li {
                     margin-bottom: 10px;
@@ -199,7 +201,7 @@ body {
                     .point {
                         width: 6px;
                         height: 6px;
-                        background-color: brown;
+                        background-color: $decorating-color;
                         border-radius: 50%;
                         position: absolute;
     
@@ -223,17 +225,12 @@ body {
             }
     
             .experiance {
-                height: 328px;
+                height: 320px;
+                margin: 0px 0px 10px 5px;
+                padding: 30px 30px 30px 30px;
                 border: 1px solid lightgray;
                 border-top: 0px;
-                margin: 0px 0px 10px 5px;
-                padding: 40px 30px 30px 30px;
-    
-                .title {
-                    font-size: 20px;
-                    font-weight: 500;
-                    letter-spacing: 1px;
-                }
+
     
                 ul li {
                     margin-bottom: 10px;
@@ -261,7 +258,7 @@ body {
     .point {
         width: 6px;
         height: 6px;
-        background-color: brown;
+        background-color: $decorating-color;
         border-radius: 50%;
         position: absolute;
 
@@ -278,156 +275,178 @@ body {
     
     // start skills
     .skills {
+        width: 100%;
         height: 350px;
+        clear: both;
         margin-bottom: 10px;
         border: 1px solid lightgray;
+        // position: relative;
+        // top: 2px;
+
+        .left {
+            width: 50%;
+            height: 445px;
+            float: left;
+
+            .creative-skills {
+                padding: 20px 30px 30px 30px;
     
-        .creative-skills {
-            padding: 20px 30px 30px 30px;
-
-            .skill-list {
-                display: flex;
-
-                .i-can-do {
-                    margin-left: 0px;
-                    margin-top: 0px;
-                    .title {
-                        color: brown;
-                        font-size: 8px;
-                        letter-spacing: 3px;
-
-                        position: relative;
-                        top: 200px;
-                        left: 0px;
-
-                        transform-origin: 0 0;
-                        transform: rotate(270deg);
-                    }
-
-                    .top-box {
-                        width: 20px;
-                        height: 15px;
-                        border: 1px solid lightgray;
-                        border-bottom: 0px;
-                        border-right: 0px;
-                        position: relative;
-                        top: 0px;
-                        left: -70px;
-                    }
-
-                    .bottom-box {
-                        width: 20px;
-                        height: 15px;
-                        border: 1px solid lightgray;
-                        border-top: 0px;
-                        border-right: 0px;
-                        position: relative;
-                        top: 187px;
-                        left: -70px;
-                    }
-
-                    ul {
-                        margin-left: 35px;
-                        position: relative;
-                        top: -40px;
-                        left: 0px;
-
-                        li {
-                            margin-bottom: 24px;
-                            
+                .skill-list {
+                    display: flex;
+    
+                    .i-can-do {
+                        margin-left: 0px;
+                        margin-top: 0px;
+                        width: 170px;
+                        .title {
+                            color: $decorating-color;
+                            font-size: 8px;
+                            letter-spacing: 3px;
+    
+                            position: relative;
+                            top: 199px;
+                            left: 0px;
+    
+                            transform-origin: 0 0;
+                            transform: rotate(270deg);
+                        }
+    
+                        .top-box {
+                            width: 20px;
+                            height: 15px;
+                            border: 1px solid lightgray;
+                            border-bottom: 0px;
+                            border-right: 0px;
+                            position: relative;
+                            top: 0px;
+                            left: -70px;
+                        }
+    
+                        .bottom-box {
+                            width: 20px;
+                            height: 15px;
+                            border: 1px solid lightgray;
+                            border-top: 0px;
+                            border-right: 0px;
+                            position: relative;
+                            top: 187px;
+                            left: -70px;
+                        }
+    
+                        ul {
+                            width: 130px;
+                            height: 235px;
+                            margin-left: 35px;
+                            position: relative;
+                            top: -40px;
+                            left: 0px;
+    
+                            li {
+                                margin-bottom: 24px;
+                                
+                            }
                         }
                     }
-                }
-
-                .programing-skills {
-                    margin-left: -30px;
-
-                    .title {    
-                        color: brown;
-                        font-size: 8px;
-                        letter-spacing: 3px;
-
-                        position: relative;
-                        top: 180px;
-                        left: 0px;
-
-                        transform-origin: 0 0;
-                        transform: rotate(270deg);
-                    }
-
-                    .top-box {
-                        width: 20px;
-                        height: 30px;
-                        border: 1px solid lightgray;
-                        border-bottom: 0px;
-                        border-right: 0px;
-                        position: relative;
-                        top: 0px;
-                        left: -50px;
-                    }
-
-                    .bottom-box {
-                        width: 20px;
-                        height: 30px;
-                        border: 1px solid lightgray;
-                        border-top: 0px;
-                        border-right: 0px;
-                        position: relative;
-                        top: 155px;
-                        left: -50px;
-                    }
-
-                    ul {
-                        margin-left: 35px;
-                        position: relative;
-                        top: -70px;
-                        left: 0px;
-
-                        li {
-                            margin-bottom: 24px;
+    
+                    .programing-skills {
+                        margin-left: -30px;
+                        width: 128px;
+    
+                        .title {    
+                            color: $decorating-color;
+                            font-size: 8px;
+                            letter-spacing: 3px;
+    
+                            position: relative;
+                            top: 179px;
+                            left: 0px;
+    
+                            transform-origin: 0 0;
+                            transform: rotate(270deg);
+                        }
+    
+                        .top-box {
+                            width: 20px;
+                            height: 30px;
+                            border: 1px solid lightgray;
+                            border-bottom: 0px;
+                            border-right: 0px;
+                            position: relative;
+                            top: 0px;
+                            left: -50px;
+                        }
+    
+                        .bottom-box {
+                            width: 20px;
+                            height: 30px;
+                            border: 1px solid lightgray;
+                            border-top: 0px;
+                            border-right: 0px;
+                            position: relative;
+                            top: 155px;
+                            left: -50px;
+                        }
+    
+                        ul {
+                            margin-left: 35px;
+                            position: relative;
+                            top: -70px;
+                            left: 0px;
+    
+                            li {
+                                margin-bottom: 24px;
+                            }
                         }
                     }
                 }
             }
         }
-    
-        .software-skills {
-            padding: 20px 30px 30px 40px;
-            
-            ul {
-                li {
-                    display: flex;
-                    margin-bottom: 15px;
-    
-                    .icon {
-                        width: 35px;
-                        height: 35px;
-                        border: 2px solid rgb(73, 73, 73);
-                        border-radius: 2px;
+        
+        .right {
+            width: 50%;
+            height: 370px;
+            float: right;
+
+            .software-skills {
+                padding: 20px 30px 30px 35px;
+                
+                ul {
+                    margin-left: -15px;
+
+                    li {
                         display: flex;
-                        margin-left: 0px;
-                        
-                        span {
-                        font-family: 'Courier New', Courier, monospace;
-                        font-weight: 700;
+                        margin-bottom: 15px;
+        
+                        .icon {
+                            width: 35px;
+                            height: 35px;
+                            border: 2px solid rgb(73, 73, 73);
+                            border-radius: 2px;
+                            display: flex;
+                            margin-left: 0px;
+                            
+                            span {
+                            font-family: 'Courier New', Courier, monospace;
+                            font-weight: 700;
+                            }
                         }
-                    }
-    
-                    .icon-name {
-                        width: 80px;
-                        font-weight: 500;
-                        text-align: left;
-                    }
-    
-                    .skill-scrore {
-                        display: flex;
-    
-                        .point-score {
-                            width: 10px;
-                            height: 10px;
-                            margin: 6px;
-                            background-color: lightsalmon;
-                            border-radius: 50%;
+        
+                        .icon-name {
+                            width: 80px;
+                            font-weight: 500;
+                            text-align: left;
+                        }
+        
+                        .skill-scrore {
+                            display: flex;
+        
+                            .point-score {
+                                width: 10px;
+                                height: 10px;
+                                margin: 6px;
+                                background-color: lightsalmon;
+                                border-radius: 50%;
+                            }
                         }
                     }
                 }
@@ -442,7 +461,8 @@ body {
         padding: 20px 30px 10px 30px;
         border: 1px solid lightgray;
         position: relative;
-        top: -80px;
+        top: -87px;
+        margin-top: 10px;
 
         .title {
             font-size: 20px;
@@ -458,7 +478,7 @@ body {
             li {
                 width: 90px;
                 height: 90px;
-                border: 1px solid brown;
+                border: 1px solid $decorating-color;
                 border-radius: 50%;
                 text-align: center;
                 display: flex;
@@ -477,14 +497,14 @@ body {
         .circle-one {
             width: 120px;
             height: 120px;
-            border: 1px solid brown;
+            border: 1px solid $decorating-color;
             border-radius: 50%;
         }
         
         .circle-two {
             width: 108px;
             height: 108px;
-            border: 1px solid brown;
+            border: 1px solid $decorating-color;
             border-radius: 50%;
             position: relative;
             top: 6px;
@@ -494,7 +514,7 @@ body {
         .circle-three {
             width: 96px;
             height: 96px;
-            border: 1px solid brown;
+            border: 1px solid $decorating-color;
             border-radius: 50%;
             position: relative;
             top: 6px;
