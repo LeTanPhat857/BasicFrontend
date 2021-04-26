@@ -1,0 +1,28 @@
+.background {
+  background-image: url("../img/pokemon2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+img {
+  width: 70px;
+  height: 70px;
+}
+
+.menu li:hover {
+  background-color: blue;
+}
+
+#levels ul {
+  list-style-type: none;
+  display: none;
+}
+
+#levels:hover {
+  background-color: white;
+}
+
+#levels:hover ul {
+  display: block;
+}
+/*# sourceMappingURL=style.css.map */
