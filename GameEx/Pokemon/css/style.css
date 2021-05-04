@@ -42,16 +42,6 @@
   display: block;
 }
 
-.abc {
-  width: 50px;
-  height: 10px;
-  border-radius: 10px;
-  background-color: blue;
-  position: relative;
-  top: -35px;
-  left: 25px;
-}
-
 .rain {
   height: 100%;
   background: url(../img/rain.png);
@@ -62,7 +52,7 @@
 .rain::before {
   content: '';
   position: absolute;
-  width: 1111px;
+  width: 1110px;
   height: 420px;
   background: #fff;
   -webkit-animation: lighting 2s linear infinite;

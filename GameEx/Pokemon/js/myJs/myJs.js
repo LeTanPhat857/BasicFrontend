@@ -73,8 +73,7 @@ var model = {
                 return false;
             }
         }
-        console.log('draw line x')
-        view.drawLineX(x, y1, y2);
+
         return true;
     },
     checkLineY: function (y, x1, x2) {
@@ -89,7 +88,7 @@ var model = {
                 return false;
             }
         }
-        view.drawLineY(y, x1, x2);
+
         return true;
     },
     checkRecX: function (point1, point2) {
@@ -98,12 +97,15 @@ var model = {
             maxPoint = point1;
             minPoint = point2;
         }
-        for (let x = minPoint[1]; x <= maxPoint[1]; x++) {
-            if (x > minPoint[1] && this.gameBoard[(minPoint[0])][x] !== 0) {
+        for (let x = minPoint[1] + 1; x <= maxPoint[1]; x++) {
+            if (this.gameBoard[(minPoint[0])][x] !== 0) {
                 return false;
             }
 
-            if (this.gameBoard[maxPoint[0]][x] === 0 && this.checkLineX(x, minPoint[0], maxPoint[0]) && this.checkLineY(maxPoint[0], x, maxPoint[1])) {
+            if (this.checkLineX(x, minPoint[0], maxPoint[0]) && this.checkLineY(maxPoint[0], x, maxPoint[1])) {
+                // view.drawLineY(minPoint[0], x, minPoint[1]);
+                // view.drawLineX(x, minPoint[0], maxPoint[0]);
+                // view.drawLineXY(maxPoint[0], x, maxPoint[1], 'y');
                 return true;
             }
         }
@@ -116,12 +118,15 @@ var model = {
             minPoint = point2;
         }
 
-        for (let y = minPoint[0]; y <= maxPoint[0]; y++) {
-            if (y > minPoint[0] && this.gameBoard[y][(minPoint[1])] !== 0) {
+        for (let y = minPoint[0] + 1; y <= maxPoint[0]; y++) {
+            if (this.gameBoard[y][(minPoint[1])] !== 0) {
                 return false;
             }
 
-            if (this.gameBoard[y][maxPoint[0]] === 0 && this.checkLineY(y, minPoint[1], maxPoint[1]) && this.checkLineX(maxPoint[1], y, maxPoint[0])) {
+            if (this.checkLineY(y, minPoint[1], maxPoint[1]) && this.checkLineX(maxPoint[1], y, maxPoint[0])) {
+                // view.drawLineX(minPoint[1], y, minPoint[1]);
+                // view.drawLineY(y, minPoint[1], maxPoint[1]);
+                // view.drawLineXY(maxPoint[1], y, maxPoint[0], 'x');
                 return true;
             }
         }
@@ -151,6 +156,10 @@ var model = {
             // console.log('check next max point: ' + (this.gameBoard[maxPoint[0]][x] === 0));
             while (0 <= x && x < this.gameBoard[0].length && this.gameBoard[minPoint[0]][x] === 0 && this.gameBoard[maxPoint[0]][x] === 0) {
                 if (this.checkLineX(x, minPoint[0], maxPoint[0])) {
+                    // view.drawLineX(x, minPoint[0], maxPoint[0]);
+                    // view.drawLineY(minPoint[0], minPoint[1], x);
+                    // view.drawLineXY(maxPoint[0], maxPoint[1], x);
+
                     return true;
                 }
                 x += type;
@@ -181,6 +190,10 @@ var model = {
             // console.log('check next max point: ' + (this.gameBoard[y][maxPoint[1]] === 0));
             while (0 <= y && y < this.gameBoard.length && this.gameBoard[y][minPoint[1]] === 0 && this.gameBoard[y][maxPoint[1]] === 0) {
                 if (this.checkLineY(y, minPoint[1], maxPoint[1])) {
+                    // view.drawLineY(y, minPoint[1], maxPoint[1]);
+                    // view.drawLineX(minPoint[1], minPoint[0], y);
+                    // view.drawLineXY(maxPoint[1], maxPoint[0], y, 'x');
+
                     return true;
                 }
                 y += type;
@@ -192,15 +205,19 @@ var model = {
         // situation 1: same y || same x
         if (point1[0] === point2[0] && this.checkLineY(point1[0], point1[1], point2[1])) {
             console.log('same y: ' + point1[0] + ', x1: ' + point1[1] + ', x2: ' + point2[1]);
+            // view.drawLineY(point1[0], point1[1], point2[1]);
+            // view.drawLineXY(point1[0], point1[1], point2[1], 'y');
             return true;
         }
         if (point1[1] === point2[1] && this.checkLineX(point1[1], point1[0], point2[0])) {
             console.log('same x: ' + point1[1] + ', y1: ' + point1[0] + ', y2: ' + point2[0]);
+            // view.drawLineX(point1[1], point1[0], point2[0]);
+            // view.drawLineXY(point1[1], point1[0], point2[0], 'x');
             return true;
         }
         // situation 2: rec
         if (this.checkRecX(point1, point2)) {
-            console.log('rec y true!');
+            console.log('rec x true!');
             return true;
         }
         if (this.checkRecY(point1, point2)) {
@@ -327,10 +344,47 @@ var view = {
         $('#gameBoard img').css('background-color', '');
     },
     drawLineX: function (x, y1, y2) {
-
+        $('#d2').removeClass('d-none');
+        $('#d2').css('height', 60 * Math.abs(y1 - y2) + 'px');
+        $('#d2').css('width', '10px');
+        $('#d2').css('top', (-40 - 60 * (7 - Math.min(y1, y2))) + 'px');
+        $('#d2').css('left', (175 + 50 * x) + 'px');
+        setTimeout(() => {
+            $('#d2').addClass('d-none');
+        }, 300);
     },
-    drawLineY: function () {
+    drawLineY: function (y, x1, x2) {
+        $('#d1').removeClass('d-none');
+        $('#d1').css('width', (50 * Math.abs(x1 - x2) + 'px'));
+        $('#d1').css('height', '10px');
+        $('#d1').css('top', (-35 - 60 * (7 - y)) + 'px');
+        $('#d1').css('left', (180 + 50 * Math.min(x1, x2)) + 'px');
+        setTimeout(() => {
+            $('#d1').addClass('d-none');
+        }, 300);
+    },
+    drawLineXY: function (xy, yx1, yx2, type) {
+        if (type === 'x') {
+            $('#d3').removeClass('d-none');
+            $('#d3').css('height', 60 * Math.abs(yx1 - yx2) + 'px');
+            $('#d3').css('width', '10px');
+            $('#d3').css('top', (-40 - 60 * (7 - Math.min(yx1, yx2))) + 'px');
+            $('#d3').css('left', (175 + 50 * xy) + 'px');
+            setTimeout(() => {
+                $('#d3').addClass('d-none');
+            }, 300);
+        }
 
+        if (type === 'y') {
+            $('#d3').removeClass('d-none');
+            $('#d3').css('width', (50 * Math.abs(yx1 - yx2) + 'px'));
+            $('#d3').css('height', '10px');
+            $('#d3').css('top', (-35 - 60 * (7 - xy)) + 'px');
+            $('#d3').css('left', (180 + 50 * Math.min(yx1, yx2)) + 'px');
+            setTimeout(() => {
+                $('#d3').addClass('d-none');
+            }, 300);
+        }
     },
     changeSoundButtonName: (newName) => {
         $('#sound').text(newName)
@@ -403,7 +457,8 @@ var controller = {
 
         view.setImgBorder(imgId);
 
-        var previousPoint = convertStringPointToNumPoint(model.previousImgId);
+        var previousImgId = model.previousImgId;
+        var previousPoint = convertStringPointToNumPoint(previousImgId);
         var currentPoint = convertStringPointToNumPoint(imgId);
 
         if (model.previousImgId === imgId) { // doubleClick
@@ -413,15 +468,17 @@ var controller = {
             this.playSound('true');
             model.gameBoard[(previousPoint[0])][(previousPoint[1])] = 0;
             model.gameBoard[(currentPoint[0])][(currentPoint[1])] = 0;
-            view.hideImageById(model.previousImgId);
-            view.hideImageById(imgId);
+            // setTimeout(() => {
+                view.hideImageById(previousImgId);
+                view.hideImageById(imgId);
+            // }, 300);
             model.previousImgId = '';
             model.score += 1;
             view.setScore(model.score);
             // console.log('\n');
         } else {
-            if (model.previousImgId !== '') {
-                view.resetImgBorder(model.previousImgId);
+            if (previousImgId !== '') {
+                view.resetImgBorder(previousImgId);
             }
             model.previousImgId = imgId;
         }
