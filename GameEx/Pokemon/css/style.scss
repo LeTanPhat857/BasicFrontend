@@ -5,6 +5,7 @@
     background-repeat: no-repeat;
     border-radius: 5px;
     box-shadow: 3px;
+    overflow: hidden;
 }
 
 #gameBoard {
@@ -20,12 +21,7 @@
             border: 1px solid pink;
             border-radius: 5px;
         }
-        
-        img:hover {
-            border: 2px solid red;
-        }
     }
-
 
 }
 
@@ -49,3 +45,66 @@
         display: block;
     }
 }
+
+.abc {
+    width: 50px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: blue;
+    position: relative;
+    top: -35px;
+    left: 25px;
+}
+
+.rain {
+    height: 100%;
+    background: url(../img/rain.png);
+    animation: rain 0.3s linear infinite;
+}
+
+.rain::before {
+    content: '';
+    position: absolute;
+    width: 1111px;
+    height: 420px;
+    background: #fff;
+    animation: lighting 2s linear infinite;
+    opacity: 0;
+}
+
+@keyframes rain {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+@keyframes lighting {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 0;
+    }
+    11% {
+        opacity: 0;
+    }
+    14% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 0;
+    }
+    21% {
+        opacity: 1;
+    }
+    24% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+

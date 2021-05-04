@@ -3,14 +3,17 @@ var model = {
     // attributes
     start: false,
     pause: false,
+    sound: true,
     level: 1,
-    maxTime: 222,
-    time: 222,
+    maxTime: 88,
+    time: 88,
     score: 0,
     highScores: [],
     gameBoard: [],
-    TimerIntervalNumber: 0,
+    timerIntervalNumber: 0,
     previousImgId: '',
+    levelIntervalNumber: 0,
+
     // methods
     generateGameBoard: function (rowNum, columnNum, imgNum) {
         var imgNumLimit = Math.floor((rowNum * columnNum) / imgNum) + 1;
@@ -70,7 +73,8 @@ var model = {
                 return false;
             }
         }
-
+        console.log('draw line x')
+        view.drawLineX(x, y1, y2);
         return true;
     },
     checkLineY: function (y, x1, x2) {
@@ -85,7 +89,7 @@ var model = {
                 return false;
             }
         }
-
+        view.drawLineY(y, x1, x2);
         return true;
     },
     checkRecX: function (point1, point2) {
@@ -94,17 +98,15 @@ var model = {
             maxPoint = point1;
             minPoint = point2;
         }
-
-        for (let x = minPoint[1] + 1; x <= maxPoint[1]; x++) {
-            if (this.gameBoard[(minPoint[0])][x] !== 0) {
+        for (let x = minPoint[1]; x <= maxPoint[1]; x++) {
+            if (x > minPoint[1] && this.gameBoard[(minPoint[0])][x] !== 0) {
                 return false;
             }
 
-            if (this.checkLineX(x, minPoint[0], maxPoint[0]) && this.checkLineY(maxPoint[0], x, maxPoint[1])) {
+            if (this.gameBoard[maxPoint[0]][x] === 0 && this.checkLineX(x, minPoint[0], maxPoint[0]) && this.checkLineY(maxPoint[0], x, maxPoint[1])) {
                 return true;
             }
         }
-
         return false;
     },
     checkRecY: function (point1, point2) {
@@ -114,12 +116,12 @@ var model = {
             minPoint = point2;
         }
 
-        for (let y = minPoint[0] + 1; y <= maxPoint[0]; y++) {
-            if (this.gameBoard[y][(minPoint[1])] !== 0) {
+        for (let y = minPoint[0]; y <= maxPoint[0]; y++) {
+            if (y > minPoint[0] && this.gameBoard[y][(minPoint[1])] !== 0) {
                 return false;
             }
 
-            if (this.checkLineY(y, minPoint[1], maxPoint[1]) && this.checkLineX(maxPoint[1], y, maxPoint[0])) {
+            if (this.gameBoard[y][maxPoint[0]] === 0 && this.checkLineY(y, minPoint[1], maxPoint[1]) && this.checkLineX(maxPoint[1], y, maxPoint[0])) {
                 return true;
             }
         }
@@ -132,7 +134,6 @@ var model = {
             maxPoint = point1;
             minPoint = point2;
         }
-
         var x = maxPoint[1] + type;
         var row = minPoint[0];
         var colFinish = maxPoint[1];
@@ -141,13 +142,18 @@ var model = {
             row = maxPoint[0];
             colFinish = minPoint[1];
         }
-
-        if ((this.gameBoard[row][colFinish] !== 0 || minPoint[1] === maxPoint[1]) && this.checkLineX(row, minPoint[1], maxPoint[1])) {
-            while (this.gameBoard[minPoint[0]][x] === 0 && this.gameBoard[maxPoint[0]][x] === 0) {
-                if (this.checkLineY(x, minPoint[0], maxPoint[0])) {
+        // console.log('row: ' + row + ', colFinish: ' + colFinish +', type: ' + type);
+        // console.log('check first point: ' + (this.gameBoard[row][colFinish] !== 0));
+        // console.log('check line from min point to first point: ' + this.checkLineY(row, minPoint[1], maxPoint[1]));
+        // console.log('------------------------------------------------');
+        if ((minPoint[1] === maxPoint[1] || this.gameBoard[row][colFinish] === 0) && this.checkLineY(row, minPoint[1], maxPoint[1])) {
+            // console.log('check next min point: ' + (this.gameBoard[minPoint[0]][x] === 0));
+            // console.log('check next max point: ' + (this.gameBoard[maxPoint[0]][x] === 0));
+            while (0 <= x && x < this.gameBoard[0].length && this.gameBoard[minPoint[0]][x] === 0 && this.gameBoard[maxPoint[0]][x] === 0) {
+                if (this.checkLineX(x, minPoint[0], maxPoint[0])) {
                     return true;
                 }
-                x++;
+                x += type;
             }
         }
         return false;
@@ -158,7 +164,6 @@ var model = {
             maxPoint = point1;
             minPoint = point2;
         }
-
         var y = maxPoint[0] + type;
         var col = minPoint[1];
         var rowFinish = maxPoint[0];
@@ -167,24 +172,29 @@ var model = {
             col = maxPoint[1];
             rowFinish = minPoint[0];
         }
-        console.log('col: ' + col + ', rowFinish: ' + rowFinish);
-        if ((this.gameBoard[col][rowFinish] !== 0 || minPoint[0] === maxPoint[0]) && this.checkLineY(col, minPoint[0], maxPoint[0])) {
-            while (this.gameBoard[y][minPoint[1]] === 0 && this.gameBoard[y][maxPoint[1]] === 0) {
-                if (this.checkLineX(y, minPoint[1], maxPoint[1])) {
+        // console.log('col: ' + col + ', rowFinish: ' + rowFinish +', type: ' + type);
+        // console.log('check first point: ' + (this.gameBoard[rowFinish][col] !== 0));
+        // console.log('check line from min point to first point: ' + this.checkLineX(col, minPoint[0], maxPoint[0]));
+        // console.log('------------------------------------------------');
+        if ((minPoint[0] === maxPoint[0] || this.gameBoard[rowFinish][col] === 0) && this.checkLineX(col, minPoint[0], maxPoint[0])) {
+            // console.log('check next min point: ' + (this.gameBoard[y][minPoint[1]] === 0));
+            // console.log('check next max point: ' + (this.gameBoard[y][maxPoint[1]] === 0));
+            while (0 <= y && y < this.gameBoard.length && this.gameBoard[y][minPoint[1]] === 0 && this.gameBoard[y][maxPoint[1]] === 0) {
+                if (this.checkLineY(y, minPoint[1], maxPoint[1])) {
                     return true;
                 }
-                y++;
+                y += type;
             }
         }
         return false;
     },
     checkPath: function (point1, point2) {
         // situation 1: same y || same x
-        if (this.checkLineY(point1[0], point1[1], point2[1])) {
+        if (point1[0] === point2[0] && this.checkLineY(point1[0], point1[1], point2[1])) {
             console.log('same y: ' + point1[0] + ', x1: ' + point1[1] + ', x2: ' + point2[1]);
             return true;
         }
-        if (this.checkLineX(point1[1], point1[0], point2[0])) {
+        if (point1[1] === point2[1] && this.checkLineX(point1[1], point1[0], point2[0])) {
             console.log('same x: ' + point1[1] + ', y1: ' + point1[0] + ', y2: ' + point2[0]);
             return true;
         }
@@ -199,15 +209,19 @@ var model = {
         }
         // situation 3: more line
         if (this.checkMoreLineX(point1, point2, 1)) {
+            console.log('more line x type = 1');
             return true;
         }
         if (this.checkMoreLineX(point1, point2, -1)) {
+            console.log('more line x type = -1');
             return true;
         }
         if (this.checkMoreLineY(point1, point2, 1)) {
+            console.log('more line y type = 1');
             return true;
         }
         if (this.checkMoreLineY(point1, point2, -1)) {
+            console.log('more line y type = -1');
             return true;
         }
         return false;
@@ -248,18 +262,20 @@ var view = {
         }
     },
     showGameBoard: (time) => {
-        $('#gameBoard').fadeIn(time);
+        $('#gameBoard').slideDown(time);
     },
     hideGameBoard: function (time) {
+        $('#gameBoard').slideUp(time);
+    },
+    resetGameBoard: function (time) {
         $('#gameBoard').fadeOut(time);
+        $('#gameBoard img').css('border', '1px solid pink');
+        $('#gameBoard img').show();
     },
-    displayPauseButton: function () {
-        $('#startButton').text('Pause');
+    changeStartButtonName: (newName) => {
+        $('#startButton').text(newName);
     },
-    displayResumeButton: function () {
-        $('#startButton').text('Resume');
-    },
-    displayLevel: function (activeLevel) {
+    displayLevelButton: function (activeLevel) {
         for (let level = 1; level < 6; level++) {
             if (level === activeLevel) {
                 $('#level' + level).css('background-color', 'blue');
@@ -280,9 +296,12 @@ var view = {
     },
     resetProgressBar: () => {
         $('#progressBar').css('width', '370px');
+        $('#progressDiv').attr('title', 'time');
     },
-    showAlert: (message) => {
-        alert(message);
+    showAlert: (modalTitle, modalBody) => {
+        $('#modal .modal-title').html(modalTitle);
+        $('#modal .modal-body').html(modalBody);
+        $('#modal').modal('show');
     },
     hideImageById: (id) => {
         $('#' + id).hide();
@@ -293,29 +312,46 @@ var view = {
     resetImgBorder: (imgId) => {
         $('#' + imgId).css('border', '1px solid pink');
     },
-    resetScore: (newScore) => {
+    setScore: (newScore) => {
         $('#scoreButton').text(newScore);
         $('#scoreButton').attr('title', newScore);
     },
-    resetStartButton: () => {
-        $('#startButton').text('Start');
+    resetScore: () => {
+        $('#scoreButton').text('Score');
+        $('#scoreButton').attr('title', 'score');
+    },
+    resetLevelEffect: () => {
+        $('#gameBoard').removeClass('rain');
+        $('#gameBoard .row').removeClass('justify-content-between').addClass('justify-content-center');
+        $('#gameBoard .img').css('width', '50px');
+        $('#gameBoard img').css('background-color', '');
+    },
+    drawLineX: function (x, y1, y2) {
+
+    },
+    drawLineY: function () {
+
+    },
+    changeSoundButtonName: (newName) => {
+        $('#sound').text(newName)
     }
 }
 
 var controller = {
     init: function () {
-        view.displayLevel(model.level);
+        view.displayLevelButton(model.level);
     },
-    startTimer: () => {
-        model.TimerIntervalNumber = setInterval(() => {
+    startTimer: function () {
+        model.timerIntervalNumber = setInterval(() => {
             model.resetTimer();
             view.setProgressBar(model.time, model.maxTime);
-            controller.checkTimeOut();
+            this.checkTimeOut();
+            this.checkWin();
             // console.log('time: ' + model.time + ', level: ' + model.level);
         }, 3000);
     },
-    stopTimer: () => {
-        clearInterval(model.TimerIntervalNumber);
+    stopTimer: function () {
+        clearInterval(model.timerIntervalNumber);
     },
     startGame: function () {
         model.start = true;
@@ -323,40 +359,48 @@ var controller = {
         model.generateGameBoard(7, 14, 33);
         view.addGameBoard(model.gameBoard, 'img/imgs2/pieces');
         view.showGameBoard(1000);
-        view.displayPauseButton();
+        view.changeStartButtonName('Pause');
         view.showProgressBarAnimation();
-        controller.startTimer();
+        this.startTimer();
+
+        if (model.level !== 1) {
+            this.startLevelEffect(model.level);
+        }
     },
     pauseGame: function () {
         model.pause = true;
-        view.displayResumeButton();
+        view.changeStartButtonName('Resume');
         view.hideGameBoard(3000);
         view.hideProgressBarAnimation();
-        controller.stopTimer();
+        this.stopTimer();
+        this.stopLevelEffect();
     },
     resumeGame: function () {
         model.pause = false;
-        view.displayPauseButton();
+        view.changeStartButtonName('Pause');
         view.showGameBoard(1000);
         view.showProgressBarAnimation();
-        controller.startTimer();
+        this.startTimer();
+        this.startLevelEffect(model.level);
     },
     processStartButton: function () {
         if (model.start === false) {
-            controller.startGame();
+            this.startGame();
         } else if (model.pause === false) {
-            controller.pauseGame();
+            this.pauseGame();
         } else {
-            controller.resumeGame();
+            this.resumeGame();
         }
     },
     showScore: function () {
-        view.showAlert('Số điểm hiện tại của bạn là ' + model.score);
+        view.showAlert('Điểm', 'Số điểm hiện tại của bạn là ' + model.score);
     },
     showTime: function () {
-        view.showAlert('Thời gian còn lại là ' + model.time + ' giây');
+        view.showAlert('Thời gian', 'Thời gian còn lại là ' + model.time + ' giây');
     },
     processGamePlay: function (imgId) {
+        this.playSound('click');
+
         view.setImgBorder(imgId);
 
         var previousPoint = convertStringPointToNumPoint(model.previousImgId);
@@ -364,14 +408,17 @@ var controller = {
 
         if (model.previousImgId === imgId) { // doubleClick
             // do nothing
+            this.playSound('false');
         } else if (model.checkValue(previousPoint, currentPoint) && model.checkPath(previousPoint, currentPoint)) {
+            this.playSound('true');
             model.gameBoard[(previousPoint[0])][(previousPoint[1])] = 0;
             model.gameBoard[(currentPoint[0])][(currentPoint[1])] = 0;
             view.hideImageById(model.previousImgId);
             view.hideImageById(imgId);
             model.previousImgId = '';
             model.score += 1;
-            view.resetScore(model.score);
+            view.setScore(model.score);
+            // console.log('\n');
         } else {
             if (model.previousImgId !== '') {
                 view.resetImgBorder(model.previousImgId);
@@ -381,21 +428,187 @@ var controller = {
     },
     checkTimeOut: function () {
         if (model.time === 0) {
-            this.stopTimer();
-            view.showAlert('Đã hết thời gian!\nSố điểm bạn đạt được là ' + model.score);
+            this.playSound('timeout');
+            view.showAlert('Hết giờ', 'Đã hết thời gian!<br/>Số điểm bạn đạt được là ' + model.score);
             this.newGame();
         }
     },
     newGame: function () {
+        this.stopTimer();
+        this.stopLevelEffect();
         model.start = false;
         model.pause = false;
         model.score = 0;
-        view.resetScore(model.score);
+        model.time = 88;
+        view.resetScore();
         view.resetProgressBar();
-        view.resetStartButton();
-        view.hideGameBoard(5000);
+        view.changeStartButtonName('Start');
+        view.hideProgressBarAnimation();
+        view.resetGameBoard(500);
     },
-
+    imgOver: function (imgId) {
+        view.setImgBorder(imgId);
+    },
+    imgOut: function (imgId) {
+        if (imgId !== model.previousImgId) {
+            view.resetImgBorder(imgId);
+        }
+    },
+    checkWin: function () {
+        if (model.score === 49) {
+            this.playSound('win');
+            var score = model.score + model.time * model.level;
+            view.showAlert('Chúc mừng', 'Bạn đã hoàn thành lượt chơi!<br/>Thời gian còn lại là ' + model.time + ' giây!<br/>Số điểm đạt được là ' + score + ' điểm!');
+            this.checkHighScores(score);
+            this.newGame();
+        }
+    },
+    showHighScores: function () {
+        var highScoresNotification = '';
+        for (let index = 0; index < model.highScores.length; index++) {
+            highScoresNotification += model.highScores[index][0] + ' <-> ' + model.highScores[index][1] + '\n';
+        }
+        if (highScoresNotification === '') {
+            view.showAlert('Điểm cao', 'Hoàn thành lượt chơi và ghi lại kỉ lục của bạn!');
+        } else {
+            view.showAlert('Điểm cao (Thời gian <-> Điểm)', highScoresNotification);
+        }
+    },
+    checkHighScores: function (score) {
+        var date = new Date();
+        var dateString = date.getHours() + ':' + date.getMinutes() + '  ' + date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
+        if (model.highScores.length === 0) {
+            model.highScores.push([dateString, score]);
+        } else {
+            for (let index = 0; index < model.highScores.length; index++) {
+                if (model.highScores[index][1] < score) {
+                    model.highScores.splice(index, 0, [dateString, score]);
+                }
+            }
+        }
+    },
+    startLevelEffect: function (level) {
+        this.levelEffect(level)
+        model.levelIntervalNumber = setInterval(() => {
+            console.log(level);
+            this.levelEffect(level);
+        }, 10000);
+    },
+    stopLevelEffect: function () {
+        window.clearInterval(model.levelIntervalNumber);
+        view.resetLevelEffect();
+    },
+    levelEffect: function (level) {
+        switch (level) {
+            case 2:
+                console.log('run level 2');
+                $('#gameBoard').fadeTo(1000, 0.8).delay(1000).fadeTo(1000, 0.5).delay(3000).fadeTo(1000, 0.8).delay(2000).fadeTo(1000, 1);
+                break;
+            case 3:
+                console.log('run level 3');
+                $('#gameBoard').fadeTo(1000, 0.8);
+                var i = 1;
+                var temp = setInterval(() => {
+                    console.log('run interval level 3')
+                    $(('#row' + i)).fadeTo(500, 0).fadeTo(500, 1);
+                    $(('#row' + (model.gameBoard.length - i - 1))).fadeTo(500, 0).fadeTo(500, 1);
+                    i++;
+                }, 1000);
+                setTimeout(() => {
+                    clearInterval(temp);
+                    $('#gameBoard').fadeTo(1000, 1);
+                }, 9000);
+                break;
+            case 4:
+                console.log('run level 4');
+                $(('#gameBoard .row')).hide();
+                var isChanged = false;
+                if (isChanged === false) {
+                    $('#gameBoard .img').css('width', '60px');
+                    $('#gameBoard img').css('background-color', 'lightpink');
+                    for (let row = 1; row < model.gameBoard.length - 1; row++) {
+                        for (let col = 1; col < model.gameBoard[0].length - 1; col++) {
+                            var imgId = convertNumPointToStringPoint(row, col);
+                            if (model.gameBoard[row][col] !== 0) {
+                                $('#' + imgId).attr('src', 'img/imgs1/' + model.gameBoard[row][col] + '.png');
+                            }
+                        }
+                    }
+                }
+                $(('#gameBoard .row')).removeClass('justify-content-center').addClass('justify-content-between').fadeIn(1000).fadeTo(1000, 0.6).delay(5000).fadeTo(1000, 1);
+                break;
+            case 5:
+                console.log('run level 5');
+                $(('#gameBoard .row')).hide();
+                var isChanged = false;
+                if (isChanged === false) {
+                    $('#gameBoard').addClass('rain');
+                    $('#gameBoard .img').css('width', '60px');
+                    for (let row = 1; row < model.gameBoard.length - 1; row++) {
+                        for (let col = 1; col < model.gameBoard[0].length - 1; col++) {
+                            var imgId = convertNumPointToStringPoint(row, col);
+                            if (model.gameBoard[row][col] !== 0) {
+                                $('#' + imgId).attr('src', 'img/imgs1/' + model.gameBoard[row][col] + '.png');
+                            }
+                        }
+                    }
+                }
+                $(('#gameBoard .row')).removeClass('justify-content-center').addClass('justify-content-between').fadeIn(1000).fadeTo(3000, 0.9).fadeTo(500, 0.3).fadeTo(500, 0.9).fadeTo(3000, 0.9).fadeTo(500, 0.3).fadeTo(500, 0.9);
+                break;
+        }
+    },
+    changeLevel: function (level) {
+        view.showAlert('Độ khó', 'Bạn đã chọn độ khó ' + level + '<br/>Nhấn Start để chinh phục thử thách!');
+        switch (level) {
+            case '1':
+                model.level = 1;
+                break;
+            case '2':
+                model.level = 2;
+                break;
+            case '3':
+                model.level = 3;
+                break;
+            case '4':
+                model.level = 4;
+                break;
+            case '5': // liên tục đổi hai hệ hình, chớp tắt nền đen, xoay icon
+                model.level = 5;
+                break;
+        }
+        this.newGame();
+        view.displayLevelButton(model.level);
+    },
+    playSound: function (soundType) {
+        if (model.sound === true) {
+            switch (soundType) {
+                case 'click':
+                    clickSound.play();
+                    break;
+                case 'true':
+                    trueSound.play();
+                    break;
+                case 'false':
+                    falseSound.play();
+                    break;
+                case 'timeout':
+                    timeoutSound.play();
+                    break;
+                case 'win':
+                    winSound.play();
+                    break;
+            }
+        }
+    },
+    changeSound: function () {
+        if (model.sound === true) {
+            model.sound = false;
+            view.changeSoundButtonName('Start sound');
+        } else {
+            model.sound = true;
+            view.changeSoundButtonName('End sound');
+        }
+    }
 }
 
 // event handler
@@ -411,25 +624,58 @@ function handleTimeBar() {
     controller.showTime();
 }
 
-function handleGameBoardImage() {
+function handleGameBoardImgClick() {
     controller.processGamePlay(this.id);
 }
 
 function handleNewGameButton() {
     controller.newGame();
 }
+
+function handleGameBoardImgOver() {
+    controller.imgOver(this.id);
+}
+
+function handleGameBoardImgOut() {
+    controller.imgOut(this.id);
+}
+
+function handleHighScoreButton() {
+    controller.showHighScores();
+}
+
+function handleLevelButton() {
+    controller.changeLevel(this.value);
+}
+
+function handleSoundButton() {
+    controller.changeSound();
+}
+
 // init
 function init() {
     $('#startButton').click(handleStartButton);
     $('#scoreButton').click(handleScoreButton);
     $('#progressDiv').click(handleTimeBar);
-    $('#gameBoard img').click(handleGameBoardImage);
+    $('#gameBoard img').click(handleGameBoardImgClick);
+    $('#gameBoard img').mouseover(handleGameBoardImgOver);
+    $('#gameBoard img').mouseout(handleGameBoardImgOut);
     $('#newGame').click(handleNewGameButton);
+    $('#highScores').click(handleHighScoreButton);
+    $('#levels ul button').click(handleLevelButton);
+    $('#sound').click(handleSoundButton);
 
     controller.init();
 }
 
 window.onload = init;
+
+// audio files
+const clickSound = new Audio('./sound/Pikaaaa.mp3');
+const trueSound = new Audio('./sound/PikachuSoundEffect.mp3');
+const falseSound = new Audio('./sound/PikaScream.mp3');
+const timeoutSound = new Audio('./sound/PikaPikapikaPikachuu.mp3');
+const winSound = new Audio('./sound/TaDa-SoundBible.com.mp3');
 
 // helper function
 function convertStringPointToNumPoint(stringPoint) {
@@ -458,4 +704,26 @@ function convertStringPointToNumPoint(stringPoint) {
     }
 
     return [row, col];
+}
+
+function convertNumPointToStringPoint(row, col) {
+    switch (col) {
+        case 10:
+            col = 'a';
+            break;
+        case 11:
+            col = 'b';
+            break;
+        case 12:
+            col = 'c';
+            break;
+        case 13:
+            col = 'd';
+            break;
+        case 14:
+            col = 'e';
+            break;
+    }
+
+    return row + '' + col;
 }
