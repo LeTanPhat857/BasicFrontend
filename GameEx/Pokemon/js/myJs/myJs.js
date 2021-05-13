@@ -4,7 +4,7 @@ var model = {
     start: false,
     pause: false,
     sound: true,
-    level: 1,
+    level: 5,
     maxTime: 88,
     time: 88,
     score: 0,
@@ -97,6 +97,11 @@ var model = {
             maxPoint = point1;
             minPoint = point2;
         }
+
+        if (this.checkLineX(minPoint[1], minPoint[0], maxPoint[0]) && this.checkLineY(maxPoint[0], minPoint[1], maxPoint[1])) {
+            return true;
+        }
+
         for (let x = minPoint[1] + 1; x <= maxPoint[1]; x++) {
             if (this.gameBoard[(minPoint[0])][x] !== 0) {
                 return false;
@@ -116,6 +121,10 @@ var model = {
         if (minPoint[0] > maxPoint[0]) {
             maxPoint = point1;
             minPoint = point2;
+        }
+
+        if (this.checkLineX(maxPoint[1], minPoint[0], maxPoint[0]) && this.checkLineY(minPoint[0], minPoint[1], maxPoint[1])) {
+            return true;
         }
 
         for (let y = minPoint[0] + 1; y <= maxPoint[0]; y++) {

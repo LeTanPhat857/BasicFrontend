@@ -1,5 +1,9 @@
+html, body {
+    height: 100%;
+}
+
 .background {
-    height: 600px;
+    height: 100%;
     background-image: url('../img/pokemon2.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -48,8 +52,8 @@
 
 .rain {
     height: 100%;
-    background: url(../img/rain.png);
-    animation: rain 0.3s linear infinite;
+    background: url(../img/snow.png);
+    animation: rain 3s linear infinite;
 }
 
 .rain::before {
@@ -57,17 +61,23 @@
     position: absolute;
     width: 1110px;
     height: 420px;
-    background: #fff;
+    background: url(../img/pikachu.png);
     animation: lighting 2s linear infinite;
     opacity: 0;
 }
 
 @keyframes rain {
     0% {
-        background-position: 0% 0%;
+        background-position: 100% 40%;
+    }
+    30% {
+        background-position: 100% 30%;
+    }
+    60% {
+        background-position: 100% 20%;
     }
     100% {
-        background-position: 100% 100%;
+        background-position: 100% 10%;
     }
 }
 
@@ -90,7 +100,7 @@
     21% {
         opacity: 1;
     }
-    24% {
+    41% {
         opacity: 0;
     }
     100% {
