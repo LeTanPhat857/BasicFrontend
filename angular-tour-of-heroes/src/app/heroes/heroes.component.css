@@ -1,0 +1,47 @@
+.heroes li {
+    background-color: lightgray;
+    list-style-type: none;
+    border: 2px solid blue;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 15%;
+}
+
+.heroes li:hover {
+    background-color: pink;
+}
+
+.badge {
+    color: blue;
+    font-weight: 700;
+}
+
+.selected {
+    background-color: lightblue !important; 
+}
+
+@media only screen and (max-width: 600px) {
+    .heroes li {
+        width: 60%;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .heroes li {
+        width: 40%;
+    }
+}
+
+@media only screen and (min-width: 786px) {
+    .heroes li {
+        width: 20%;
+    }
+}
+
+
+
+
+
+
+
