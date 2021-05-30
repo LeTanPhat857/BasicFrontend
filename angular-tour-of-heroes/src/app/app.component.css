@@ -1,0 +1,12 @@
+nav a {
+    text-decoration: none;
+    border: 1px solid blue;
+    border-radius: 5px;
+    background-color: lightblue;
+    padding: 5px;
+    margin: 10px;
+}
+
+nav a:hover {
+    background-color: lightgray;
+}
